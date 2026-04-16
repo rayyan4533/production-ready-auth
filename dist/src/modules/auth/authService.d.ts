@@ -1,5 +1,7 @@
+import { signupPayload } from '../../modules/auth/auhModel.js';
+import { signinPayload } from '../../modules/auth/auhModel.js';
 declare class AuthService {
-    register(payload: any): Promise<{
+    register(payload: typeof signupPayload): Promise<{
         id: string;
         name: string;
         email: string;
@@ -8,7 +10,7 @@ declare class AuthService {
         createdAt: Date;
     } | undefined>;
     verifyEmail(token: string): Promise<void>;
-    login(payload: object): Promise<{
+    login(payload: typeof signinPayload): Promise<{
         user: {
             id: string;
             name: string;

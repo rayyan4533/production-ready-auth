@@ -1,13 +1,15 @@
 import crypto from 'crypto';
 import bcrypt from 'bcrypt';
 import { generateAccessToken, generateRefreshToken, generateResetToken, verifyAccessToken, verifyRefreshToken } from '../../common/utils/jwt.utils.js';
-import { signinPayload, signupPayload } from './auhModel.js';
+// import { signinPayload, signupPayload } from './auhModel.js';
 import { ApiError } from '../../common/utils/apiError.js';
 import { email } from 'zod';
 import { db } from '../../../drizzle/src/index.js';
 import { userTable } from '../../../drizzle/src/db/schema.js';
 import { eq } from 'drizzle-orm';
 import { sendResetPasswordEmail, sendVerificationEmail } from '../../common/config/email.js';
+import { signupPayload } from '../../modules/auth/auhModel.js';
+import { signinPayload } from '../../modules/auth/auhModel.js';
 class AuthService {
     async register(payload) {
         // 1. Validate the incoming data with Zod

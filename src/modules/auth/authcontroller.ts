@@ -2,7 +2,6 @@ import type {Response,Request} from 'express'
 import AuthService from './authService.js'
 import { ApiResponse } from '../../common/utils/apiResponse.js'
 
-
 export const controller = {
 
   register: async (req: Request, res: Response) => {
