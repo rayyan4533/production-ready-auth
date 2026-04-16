@@ -22,7 +22,7 @@ A robust, production-ready Authentication API built with Node.js, Express, TypeS
 - **User Login:** Authentication issuing both short-lived Access Tokens and long-lived Refresh Tokens (stored in HTTP-Only cookies).
 - **Token Refresh:** Secure endpoint to renew expired Access Tokens using the Refresh Token cookie.
 - **Logout:** Clears cookies and securely logs the user out.
-- **Role-Based Access Control (RBAC):** Middleware to protect routes and verify user roles (e.g., `admin`, `user`).
+- **Role-Based Access Control (RBAC):** Middleware to protect routes and verify user roles (e.g., `admin`, `viewer`,`editor`).
 - **Email Verification:** (In Progress) Send and verify email tokens.
 - **Password Reset:** (In Progress) Securely request and reset forgotten passwords.
 
