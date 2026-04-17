@@ -1,0 +1,34 @@
+multer is nothing but a middleware to handle multipart form data 
+saral bhasha me file upload ki baat horahi hai 
+
+
+
+files mai req.body me kaha use karsakta so i use multer to-
+parse the request and gives file
+
+file==collection of binary data on disk 
+
+file type:
+ ==>extension
+ ===>MIME type==>multipurpose internet mail extension 
+     mime:=>type and subtype
+
+Multer by default buffer memory me rakhta hai 
+
+but to add it to disk/ssd u configure shit
+
+Now if I want to store in ram mem change config
+
+
+assignment:
+during storing file in RAM 
+Ye jo buffer aara hai mai isko apne name ke according change karsaku
+
+
+we use 3rd party cdn like imagekit to store files 
+
+upload.single
+upload.array
+
+
+file upload validation in multer:
