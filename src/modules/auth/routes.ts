@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import { controller } from '../auth/authcontroller.js'
+import upload from '../../common/utils/multer.middleware.js'
 
 const router: Router = Router()
 
@@ -21,6 +22,8 @@ router.put(
   "/reset-password",
   controller.resetPassword,
 );
+
+router.post("/upload-avatar",upload.single("avatar"),controller.uploadAvatar);
 
 
 

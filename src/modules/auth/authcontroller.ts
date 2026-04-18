@@ -1,6 +1,7 @@
 import type {Response,Request} from 'express'
 import AuthService from './authService.js'
 import { ApiResponse } from '../../common/utils/apiResponse.js'
+import { ApiError } from '../../common/utils/apiError.js';
 
 export const controller = {
 
@@ -43,12 +44,31 @@ export const controller = {
   },
   
   verifyEmail: async (req: Request, res: Response) => {
-    // To be implemented
+      await AuthService.verifyEmail(req.params.token as string);
+      ApiResponse.ok(res,"Email verified successfully")
   },
   forgotPassword: async (req: Request, res: Response) => {
-    // To be implemented
+    await AuthService.forgotPassword(req.body.email);
+    ApiResponse.ok(res,"Password reset email sent successfully")
   },
   resetPassword: async (req: Request, res: Response) => {
-    // To be implemented
+    await AuthService.resetPassword(req.body.token,req.body.newPassword);
+    ApiResponse.ok(res,"Password reset successfully")
+  },
+
+  uploadAvatar : async(req:Request,res:Response)=>{
+    try {
+      const file =req.file
+      if(!file){
+        return ApiError.badRequest("No file uploaded")
+      }
+      const result = await AuthService.uploadAvatar(file,req.body.userId);
+      return ApiResponse.ok(res,"Avatar uploaded successfully",result)
+    } catch (error) {
+      console.log(error)
+      return ApiError.notFound("Failed to upload avatar")
+      
+    }
   }
+
 };

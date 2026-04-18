@@ -29,6 +29,7 @@
     "tsx": "^4.21.0"
   },
   "dependencies": {
+    "@imagekit/nodejs": "^7.5.0",
     "bcrypt": "^6.0.0",
     "cookie-parser": "^1.4.7",
     "dotenv": "^17.3.1",

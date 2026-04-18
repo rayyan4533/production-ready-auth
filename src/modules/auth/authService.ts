@@ -1,5 +1,7 @@
 import  crypto from 'crypto'
 import bcrypt from 'bcrypt'
+import fs from 'node:fs'
+import imageKit from '@imagekit/nodejs';  
 
 import {
     generateAccessToken,
@@ -18,6 +20,7 @@ import { eq } from 'drizzle-orm';
 import { sendResetPasswordEmail, sendVerificationEmail } from '../../common/config/email.js';
 import { signupPayload } from '../../modules/auth/auhModel.js';
 import { signinPayload } from '../../modules/auth/auhModel.js';
+import { url } from 'node:inspector';
 
 
 
@@ -292,8 +295,44 @@ const hashedRefreshoken = crypto.createHash("sha256").update(refreshToken).diges
       .where(eq(userTable.id, user.id));
   }
 
+  const uploadAvatar = async(file: Express.Multer.File,userId:string)=>{
+    try {
+      const fileStream = fs.createReadStream(file.path);
+      const uploadResponse= await imageKit.Files.upload({
+        file:fileStream,
+        fileName:file.filename,
+        folders:"/users-avatars"
+      })
+
+      await userTable
+      .update()
+      .set({
+        avatar:uploadResponse.url,
+      })
+      .where(eq(userTable.id,userId))
 
 
+      fs.unlinkSync(file.path);
+
+
+      return{
+        url:uploadResponse.url,
+        fileId:uploadResponse.fileId,
+      }
+
+
+
+    } catch (error) {
+      try {
+        if(file.path && fs.existsSync(file.path)){
+          fs.unlinkSync(file.path)
+        }
+      } catch (err) {
+        console.error("Failed to clean up file after upload error:", err)
+      }  
+
+      throw error;
+    }
 
     }
 
