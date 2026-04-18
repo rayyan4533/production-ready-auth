@@ -55,7 +55,7 @@ const upload = multer({
             cb(null,true)
         }
         else{
-            cb(new Error("file type not supported"),false) 
+            cb(new Error("file type not supported"))
         }
     }
 })
